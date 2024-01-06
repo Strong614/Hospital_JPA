@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Patient Management System</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #fff;
+            /* Add Bootstrap background styling */
+            background: url('https://cdn.discordapp.com/attachments/1154556835429367908/1193228145982193704/image_2.png?ex=65abf34f&is=65997e4f&hm=ea5a97bdc534f72a9bcd9f41a615151f4758ea2d8538f6dca8e07ae9a623e8a1&');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" th:href="@{/Home}">Hospital Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/Patients}">Patients Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/Actors}">Actors Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class ="container">
+    <div class = "row">
+        <h1> Patients List </h1>
+    </div>
+
+    <div class = "row">
+        <div class = "col-lg-3">
+            <a th:href = "@{/Patients/new}" class = "btn btn-primary btn-sm mb-3"> Add Patient</a>
+        </div>
+    </div>
+    <table class = "table table-striped table-bordered">
+        <thead class = "table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Illness</th>
+            <th>Contact Number</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="patient: ${Patients}">
+            <td th:text="${patient.patient_name}"></td>
+            <td th:text="${patient.patient_type}"></td>
+            <td th:text="${patient.illness}"></td>
+            <td th:text="${patient.contactNumber}"></td>
+            <td th:text="${patient.address}"></td>
+            <td>
+                <a th:href="@{/Patients/edit/{id}(id=${patient.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/Patients/{id}(id=${patient.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>
